@@ -21,7 +21,7 @@ public class RankManager {
 
     public Rank getRank(UUID uuid){
         if(main.getRankCache().containsKey(uuid)){
-            return main.getRankManager().getRank(uuid);
+            return main.getRankCache().get(uuid);
         }else {
             try {
                 PreparedStatement getPlayerRank;
@@ -29,7 +29,7 @@ public class RankManager {
                 getPlayerRank.setString(1, uuid.toString());
                 ResultSet result = getPlayerRank.executeQuery();
                 if (!result.isBeforeFirst()) {
-                    return null;
+                    return Rank.PLAYER;
                 } else {
                     String rank = null;
                     while (result.next()) {

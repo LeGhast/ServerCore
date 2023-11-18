@@ -19,7 +19,6 @@ public class RankListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
         Player player = e.getPlayer();
-
         main.getNameTagManager().setNameTags(player);
         main.getNameTagManager().newNameTag(player);
     }
