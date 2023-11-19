@@ -2,7 +2,9 @@ package de.leghast.servercore;
 
 import de.leghast.servercore.database.Database;
 import de.leghast.servercore.database.DatabaseConfigManager;
-import de.leghast.servercore.rank.RankListener;
+import de.leghast.servercore.listener.PlayerChatListener;
+import de.leghast.servercore.listener.PlayerJoinListener;
+import de.leghast.servercore.listener.PlayerQuitListener;
 import de.leghast.servercore.rank.RankSystem;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -21,6 +23,7 @@ public final class ServerCore extends JavaPlugin {
     @Override
     public void onEnable() {
         initialiseRankSystem();
+        registerListeners();
         initialiseDatabase();
     }
 
@@ -41,10 +44,19 @@ public final class ServerCore extends JavaPlugin {
 
     private void initialiseRankSystem(){
         rankSystem = new RankSystem(this);
-        Bukkit.getPluginManager().registerEvents(new RankListener(rankSystem), this);
+    }
+
+    private void registerListeners(){
+        Bukkit.getPluginManager().registerEvents(new PlayerChatListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerQuitListener(this), this);
     }
 
     public Database getDatabase(){
         return database;
+    }
+
+    public RankSystem getRankSystem(){
+        return rankSystem;
     }
 }
