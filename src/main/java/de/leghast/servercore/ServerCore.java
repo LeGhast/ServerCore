@@ -52,6 +52,7 @@ public final class ServerCore extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerQuitListener(this), this);
     }
 
+
     public Database getDatabase(){
         return database;
     }
