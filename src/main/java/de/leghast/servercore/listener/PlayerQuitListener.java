@@ -15,6 +15,7 @@ public class PlayerQuitListener implements Listener {
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent e){
+        e.setQuitMessage("");
         main.getRankSystem().getNameTagManager().removeNameTag(e.getPlayer());
         main.getRankSystem().getRankCache().remove(e.getPlayer().getUniqueId());
     }
