@@ -44,5 +44,9 @@ public class RankManager {
         }
     }
 
+    public boolean hasRank(UUID uuid, Rank rank){
+        return getRank(uuid) == rank;
+    }
+
 
 }
