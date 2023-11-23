@@ -5,3 +5,5 @@ api-version: '1.20'
 authors: [GhastCraftHD]
 description: The core server plugin for the LeGhast.de network
 website: https://www.leghast.de
+commands:
+  vanish:

@@ -5,6 +5,7 @@ import de.leghast.servercore.rank.manager.NameTagManager;
 import de.leghast.servercore.rank.manager.RankManager;
 
 import java.util.HashMap;
+import java.util.Set;
 import java.util.UUID;
 
 public class RankSystem {

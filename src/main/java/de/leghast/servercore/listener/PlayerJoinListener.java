@@ -25,6 +25,10 @@ public class PlayerJoinListener implements Listener {
         e.setJoinMessage("");
         main.getRankSystem().getNameTagManager().setNameTags(player);
         main.getRankSystem().getNameTagManager().newNameTag(player);
+        for(Player vanishedPlayer : main.getSettingsManager().getVanishedPlayers()){
+            if(vanishedPlayer != player){
+                player.hidePlayer(main, vanishedPlayer);
+            }
+        }
     }
-
 }
