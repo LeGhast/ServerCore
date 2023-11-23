@@ -27,7 +27,7 @@ public class RankManager {
                 PreparedStatement getPlayerRank;
                 getPlayerRank = plugin.getDatabase().getConnection().prepareStatement("SELECT player_rank FROM players WHERE player_uuid = ?");
                 getPlayerRank.setString(1, uuid.toString());
-                ResultSet result = getPlayerRank.executeQuery();
+                ResultSet result = plugin.getDatabase().executeQuery(getPlayerRank);
                 if (!result.isBeforeFirst()) {
                     return Rank.PLAYER;
                 } else {

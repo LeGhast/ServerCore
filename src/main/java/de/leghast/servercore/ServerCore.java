@@ -29,17 +29,13 @@ public final class ServerCore extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        database.disconnect();
     }
 
     private void initialiseDatabase(){
         databaseConfig = new DatabaseConfigManager(this);
         database = new Database(this, databaseConfig);
-        try {
             database.connect();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private void initialiseRankSystem(){

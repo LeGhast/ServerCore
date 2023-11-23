@@ -1,11 +1,9 @@
 package de.leghast.servercore.database;
 
-import com.google.common.graph.Network;
 import de.leghast.servercore.ServerCore;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 
 public class Database {
 
@@ -26,12 +24,19 @@ public class Database {
         PASSWORD = databaseConfig.getPassword();
     }
 
-    public void connect() throws SQLException {
-        connection = DriverManager.getConnection(
-                URL,
-                USERNAME,
-                PASSWORD
-        );
+    public void connect(){
+        if(isConnected()){
+            disconnect();
+        }
+        try {
+            connection = DriverManager.getConnection(
+                    URL,
+                    USERNAME,
+                    PASSWORD
+            );
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public boolean isConnected(){
@@ -49,6 +54,18 @@ public class Database {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+        }
+    }
+
+    public ResultSet executeQuery(PreparedStatement statement){
+        try {
+            return statement.executeQuery();
+        } catch (SQLException e) {
+            if(e instanceof CommunicationsException){
+                connect();
+                return executeQuery(statement);
+            }
+            throw new RuntimeException(e);
         }
     }
 
