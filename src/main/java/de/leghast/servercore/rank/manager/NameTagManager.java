@@ -27,6 +27,7 @@ public class NameTagManager {
             Team team = player.getScoreboard().getTeam(main.getRankManager().getRank(player.getUniqueId()).getTabSorter() +
                     main.getRankManager().getRank(player.getUniqueId()).name());
             player.setPlayerListName(team.getPrefix() + player.getName());
+            player.setDisplayName(team.getPrefix() + player.getName());
 
             for(Player target : Bukkit.getOnlinePlayers()){
                 if(player.getUniqueId() != target.getUniqueId()){
@@ -53,6 +54,11 @@ public class NameTagManager {
                 target.getScoreboard().getEntryTeam(player.getName()).removeEntry(player.getName());
             }
         }
+    }
+
+    public void updateTags(Player player){
+        removeNameTag(player);
+        newNameTag(player);
     }
 
     public boolean isDisplayingRanks(){

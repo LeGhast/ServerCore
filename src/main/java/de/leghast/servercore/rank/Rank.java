@@ -4,11 +4,11 @@ import net.md_5.bungee.api.ChatColor;
 
 public enum Rank {
 
-    ADMINISTRATOR("#E97777", 'v', "Admin", "#e3c3c3"),
-    STAFF("#FFCF96",'w', "Staff", "#dbc9b4"),
-    VIP("#95BDFF", 'x', "VIP", "#abc8f7"),
-    PREMIUM("#BEADFA",'y', "Premium", "#bfb8d9"),
-    PLAYER("#79AC78", 'z', "Player", "#b2cfb2");
+    ADMINISTRATOR("#E97777", 'a', "Admin", "#e3c3c3"),
+    STAFF("#FFCF96",'b', "Staff", "#dbc9b4"),
+    VIP("#95BDFF", 'c', "VIP", "#abc8f7"),
+    PREMIUM("#BEADFA",'d', "Premium", "#bfb8d9"),
+    PLAYER("#79AC78", 'e', "Player", "#b2cfb2");
 
     private ChatColor color;
     private char tabSorter;
