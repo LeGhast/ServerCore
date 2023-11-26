@@ -57,16 +57,4 @@ public class Database {
         }
     }
 
-    public ResultSet executeQuery(PreparedStatement statement){
-        try {
-            return statement.executeQuery();
-        } catch (SQLException e) {
-            if(e instanceof CommunicationsException){
-                connect();
-                return executeQuery(statement);
-            }
-            throw new RuntimeException(e);
-        }
-    }
-
 }

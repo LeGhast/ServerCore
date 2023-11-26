@@ -1,5 +1,6 @@
 package de.leghast.servercore.rank.manager;
 
+import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 import de.leghast.servercore.ServerCore;
 import de.leghast.servercore.rank.Rank;
 import de.leghast.servercore.rank.RankSystem;
@@ -27,7 +28,7 @@ public class RankManager {
                 PreparedStatement getPlayerRank;
                 getPlayerRank = plugin.getDatabase().getConnection().prepareStatement("SELECT player_rank FROM players WHERE player_uuid = ?");
                 getPlayerRank.setString(1, uuid.toString());
-                ResultSet result = plugin.getDatabase().executeQuery(getPlayerRank);
+                ResultSet result = getPlayerRank.executeQuery();
                 if (!result.isBeforeFirst()) {
                     return Rank.PLAYER;
                 } else {
@@ -38,7 +39,10 @@ public class RankManager {
                     return Rank.valueOf(rank);
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                if(e instanceof CommunicationsException){
+                    plugin.getDatabase().connect();
+                    return getRank(uuid);
+                }
                 return null;
             }
         }
